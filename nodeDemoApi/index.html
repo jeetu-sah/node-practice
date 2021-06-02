@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Node Demo API</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="jumbotron text-center">
+        <h1>My First Bootstrap Page</h1>
+        <p>Resize this responsive page to see the effect!</p>
+    </div>
+    <div class="col-sm-12" style="text-align: center;">
+        <button class="btn btn-danger">Get quotes</button>
+    </div>
+    <div id="quotes"></div>
+    <script>
+        const getQuotes = async () => {
+            const api = 'https://jsonplaceholder.typicode.com/todos';
+            try {
+                let data = await fetch(api);
+                let realData = await data.json();
+                var div =  $("#quotes");
+                    div.append( $("<table>",{ class:'table table-stripped'}).append( 
+                                                                $("<tr>").append( 
+                                                                    $("<th>").text("Name"), 
+                                                                    $("<th>").text("Email"),
+                                                                    $("<th>").text("Mobile") 
+                                                                )));
+                 
+                    $.each(realData, function (indexInArray, valueOfElement) { 
+                        //console.log(valueOfElement); 
+                        //console.log(table);
+                    });
+                //$("#quotes").html(table);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getQuotes();
+    </script>
+
+</body>
+</html>
